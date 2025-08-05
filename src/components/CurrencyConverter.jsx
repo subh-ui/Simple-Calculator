@@ -24,16 +24,16 @@ export default function CurrencyConverter() {
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md mt-10">
-      <h2 className="text-xl font-bold mb-4">Currency Converter</h2>
-      <div className="flex mb-2">
+      <h2 className="text-xl font-bold mb-4 text-center sm:text-left">Currency Converter</h2>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
         <input
           type="number"
-          className="flex-1 p-2 border rounded mr-2"
+          className="w-full sm:flex-1 p-2 border rounded"
           value={currencyAmount}
           onChange={(e) => setCurrencyAmount(e.target.value)}
         />
         <select
-          className="p-2 border rounded mr-2"
+          className="w-full sm:w-auto p-2 border rounded"
           value={fromCurrency}
           onChange={(e) => setFromCurrency(e.target.value)}
         >
@@ -42,7 +42,7 @@ export default function CurrencyConverter() {
           ))}
         </select>
         <select
-          className="p-2 border rounded"
+          className="w-full sm:w-auto p-2 border rounded"
           value={toCurrency}
           onChange={(e) => setToCurrency(e.target.value)}
         >
@@ -53,11 +53,11 @@ export default function CurrencyConverter() {
       </div>
       <button
         onClick={convertCurrency}
-        className="w-full bg-orange-500 text-white py-2 rounded mb-2 hover:bg-orange-600"
+        className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition"
       >
         Convert
       </button>
-      <div className="text-right text-lg font-semibold">
+      <div className="text-right text-lg font-semibold mt-2">
         Converted Amount: {convertedAmount}
       </div>
     </div>

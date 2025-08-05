@@ -22,9 +22,11 @@ export default function UnitConverter() {
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md mt-4">
-      <h2 className="text-xl font-bold mb-4">Unit Converter</h2>
+      <h2 className="text-xl font-bold mb-4 text-center sm:text-left">Unit Converter</h2>
+
+      {/* Category dropdown */}
       <select
-        className="w-full p-2 border rounded mb-2"
+        className="w-full p-2 border rounded mb-3"
         value={unitCategory}
         onChange={(e) => {
           const cat = e.target.value;
@@ -39,15 +41,17 @@ export default function UnitConverter() {
         ))}
       </select>
 
-      <div className="flex mb-2 gap-2">
+      {/* Converting options */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 mb-3">
         <input
           type="number"
-          className="flex-1 p-2 border rounded"
+          className="w-full sm:flex-1 p-2 border rounded mb-2 sm:mb-0"
           value={unitValue}
           onChange={(e) => setUnitValue(e.target.value)}
         />
+
         <select
-          className="p-2 border rounded"
+          className="w-full sm:w-auto p-2 border rounded mb-2 sm:mb-0"
           value={fromUnit}
           onChange={(e) => setFromUnit(e.target.value)}
         >
@@ -55,8 +59,9 @@ export default function UnitConverter() {
             <option key={u} value={u}>{u}</option>
           ))}
         </select>
+
         <select
-          className="p-2 border rounded"
+          className="w-full sm:w-auto p-2 border rounded"
           value={toUnit}
           onChange={(e) => setToUnit(e.target.value)}
         >
@@ -65,10 +70,19 @@ export default function UnitConverter() {
           ))}
         </select>
       </div>
-      <button onClick={convertUnit} className="w-full bg-yellow-400 py-2 rounded hover:bg-yellow-500 mb-2">
+
+      {/* Button */}
+      <button
+        onClick={convertUnit}
+        className="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition"
+      >
         Convert
       </button>
-      <div className="text-right font-semibold">Converted: {unitConverted}</div>
+
+      {/* Result */}
+      <div className="text-right font-semibold mt-2">
+        Converted: {unitConverted}
+      </div>
     </div>
   );
 }
