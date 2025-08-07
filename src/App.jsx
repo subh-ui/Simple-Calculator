@@ -19,11 +19,37 @@ export default function App() {
         .replace(/log\(/g, "Math.log(")
         .replace(/exp\(/g, "Math.exp(")
         .replace(/pi/g, Math.PI)
-        .replace(/e/g, Math.E);
+        .replace(/e/g, Math.E)
+        .replace(/%/g, "/100");
+
       const evalResult = eval(expression);
       setResult(evalResult);
+      setInput(String(evalResult)); // Update input with result
     } catch (err) {
       alert("Invalid expression");
+    }
+  };
+
+  const handleButtonClick = (btn) => {
+    if (btn === "=") {
+      calculate();
+    } else if (btn === "C") {
+      setInput("");
+      setResult(0);
+    } else if (btn === "+/-") {
+      try {
+        let value = eval(input);
+        value *= -1;
+        setInput(String(value));
+      } catch {
+        alert("Enter valid number before +/-");
+      }
+    } else if (btn === "()") {
+      const open = (input.match(/\(/g) || []).length;
+      const close = (input.match(/\)/g) || []).length;
+      setInput(input + (open > close ? ")" : "("));
+    } else {
+      setInput(input + btn);
     }
   };
 
@@ -40,13 +66,7 @@ export default function App() {
         {["C", "()", "%", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".", "="].map((btn) => (
           <button
             key={btn}
-            onClick={() => {
-              if (btn === "=") calculate();
-              else if (btn === "C") {
-                setInput("");
-                setResult(0);
-              } else setInput(input + btn);
-            }}
+            onClick={() => handleButtonClick(btn)}
             className="bg-amber-400 rounded py-2 text-xl font-bold hover:bg-amber-500"
           >
             {btn}
